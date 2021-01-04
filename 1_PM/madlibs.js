@@ -11,8 +11,14 @@ const verb1 = ______
 Change thses values to generate a different story
 */
 
+const firstName = 'Emily'
+const hometown = 'Boston'
+const favoriteFood = 'rice'
+
 const story = `
-**replace this with your story using a template string**
+Once upon a time, there was a person named ${firstName} who came from ${hometown}.
+${firstName} really liked to eat ${favoriteFood}.
+One day, ${firstName} ordered enough dishes of ${favoriteFood} from Amazon to last them a whole year.
 `
 
 console.log(story)

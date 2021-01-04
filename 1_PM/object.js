@@ -10,11 +10,25 @@ const assert = require('assert')
  */
 
 const hasFalsyValue = obj => {
+  if (typeof obj !== 'object') {
+    console.log(!obj)
+    return !obj
+  }
+
+  for (const key in obj) {
+    console.log(obj[key])
+    if (hasFalsyValue(obj[key])) {
+      return true
+    }
+  }
+
+  console.log("hi")
+  return false
 };
 
 const falsyObj = {
   hi: "I am falsy somewhere...",
-  "i'm an number": 23,
+  "i'm a number": 23,
   "i'm a boolean": true,
   "i'm an object": {
     aint: 'nuthin to look at here...',
@@ -32,6 +46,8 @@ const truthyObj = {
     anotherTruthy: ";)"
   }
 };
+
+console.log(hasFalsyValue(truthyObj))
 
 assert(hasFalsyValue(falsyObj) === true);
 assert(hasFalsyValue(truthyObj) === false);

@@ -100,25 +100,39 @@ Assume that the data in the database is dynamic and changes every day so
 dont hard code solutions. */
 
 // Implement the function usersByPet to return a list of user objects filtered by cat or dog.
-const usersByPet = pet => {
-}
+const usersByPet = pet => database.users.filter((user) => user.favPet == pet);
 console.log(usersByPet('dog'))
 console.log(usersByPet('cat'))
 
 // Implement the function collegeLookup to return the name and color of a user's college.
 const collegeLookup = user => {
+  const id = database.users.filter((u) => {
+    return u.firstName == user;
+  })[0].collegeId;
+
+  const info = database.college.filter((college) => {
+    return college.id == id;
+  })[0];
+
+  return [info.name, info.color];
 }
 console.log(collegeLookup('Charles'))
 console.log(collegeLookup('Daniela'))
 
 // define oppositesAttract as a list of friend objects whose favorite pets are different.
-const oppositesAttract = _______
+const oppositesAttract = database.friends.filter(({id1, id2}) => {
+  return database.users[id1].favPet != database.users[id2].favPet;
+});
 console.log(oppositesAttract)
 
 // define local as a list of users who live in the same state as they go to school.
-const local = _______
+const local = database.users.filter(({state, collegeId}) => {
+  return state == database.college[collegeId].state;
+});
 console.log(local)
 
 // define collegeFriends as a list of friend objects that go to the same college
-const collegeFriends = _______
+const collegeFriends = database.friends.filter(({id1, id2}) => {
+  return database.users[id1].collegeId == database.users[id2].collegeId;
+});
 console.log(collegeFriends)
